@@ -1,7 +1,9 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const passport = require('passport');
 require('dotenv').config();
+require('./routes/passport');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
@@ -24,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/auth', authRoute);
-app.use('/users', usersRoute);
+app.use('/users', passport.authenticate('jwt', {session: false}), usersRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
