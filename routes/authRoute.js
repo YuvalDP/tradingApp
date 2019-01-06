@@ -18,7 +18,7 @@ router.post('/login', [
         if(err) {
             res.status(501).json({ message: 'Internal server error', err });
         } else if(results.length === 1) {
-            res.send(results);
+            res.send({ ...results[0], loggedIn: true });
         } else {
             res.status(422).json({ message: 'Invalid credentials.' });
         }
