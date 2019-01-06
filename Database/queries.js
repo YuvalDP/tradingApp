@@ -5,3 +5,5 @@ exports.signup = 'insert into user (username, firstname, lastname, email, passwo
 exports.checkifExists = 'SELECT * FROM user where email = ?';
 
 exports.updateCredential = 'UPDATE user set password = ? where email = ?';
+
+exports.fetchTradeByUser = 'select * from trade where userid = ?';
