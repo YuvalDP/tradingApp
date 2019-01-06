@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const {  check, validationResult } = require('express-validator/check');
 const db = require('../Database/connection');
-const { fetchTradeHistory } = require('../Database/queries');
+const { fetchTradeHistory, fetchTradeByUser } = require('../Database/queries');
 
 router.get('/fetchTrades/:id',[
     check('id').exists().withMessage('Id params required'),
@@ -15,7 +15,14 @@ router.get('/fetchTrades/:id',[
             const err = errors.array().map(err => ({ field: err.param, message: err.msg }));
             return res.status(422).json(err);
         }
-        res.send(req.params);
+        const { id } = req.params;
+        db.query(fetchTradeByUser, [id], (err, results, fields) => {
+           if(err) {
+               res.status(501).json({ message: 'Internal server error', err });
+           } else {
+               res.send(results);
+           }
+        });
     } else {
         res.status(422).json({ message: 'Unauthorized' });
     }
