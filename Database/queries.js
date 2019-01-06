@@ -8,4 +8,20 @@ exports.updateCredential = 'UPDATE user set password = ? where email = ?';
 
 exports.fetchTradeByUser = 'select * from trade where userid = ?';
 
-exports.fetchTradeHistory = 'SELECT t.*, c.* from trades t left join contract c on t.contractid = c.id where status = \'open\'';
+exports.fetchTradeHistory = `
+SELECT 
+    t.status,
+    t.price,
+    t.quantity,
+    c.basecurrency,
+    c.symbol,
+    c.currency,
+    c.symbol,
+    sum(t.quantity * t.price) as cost,
+    (t.price - sum(t.quantity * t.price)) * t.quantity as PNL
+FROM
+    trades t
+        LEFT JOIN
+    contract c ON t.contractid = c.id
+WHERE
+    status = 'open'`;

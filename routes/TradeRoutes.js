@@ -21,7 +21,7 @@ router.get('/fetchTrades/:id',[
     }
 });
 
-router.get('/fetchAllTrade', (req, res) => {
+router.get('/fetchPortfolio', (req, res) => {
    if(req.user){
        db.query(fetchTradeHistory, [], (err, results, fields) => {
            if(err) {
