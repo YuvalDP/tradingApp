@@ -25,3 +25,9 @@ FROM
     contract c ON t.contractid = c.id
 WHERE
     status = 'open'`;
+
+exports.checkTradeExists = 'select * from trademanagement where userid = ? and symbol = ?';
+
+exports.updateTradeRisks = 'update trademanagement set max_risks = ? where id = ? ';
+
+exports.createTradeRisks = 'insert into trademanagement (symbol, max_risks, userid) values (?, ?, ?)';
