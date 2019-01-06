@@ -11,6 +11,8 @@ const cors = require('cors');
 var indexRouter = require('./routes/index');
 const authRoute = require('./routes/authRoute');
 const usersRoute = require('./routes/users');
+const tradeRoute = require('./routes/TradeRoutes');
+const signupRoute = require('./routes/signupRoute');
 
 var app = express();
 
@@ -27,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/auth', authRoute);
 app.use('/users', passport.authenticate('jwt', {session: false}), usersRoute);
+app.use('/user', signupRoute);
+app.use('/trade', passport.authenticate('jwt', {session: false}), tradeRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
