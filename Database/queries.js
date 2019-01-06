@@ -1,0 +1,1 @@
+exports.login = 'SELECT * FROM user where email = ? and password = ?';
