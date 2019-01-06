@@ -20,7 +20,7 @@ router.post('/login', [
         } else if(results.length === 1) {
             res.send(results);
         } else {
-            res.status(422).json({ message: 'Internal server error' });
+            res.status(422).json({ message: 'Invalid credentials.' });
         }
     })
 });
