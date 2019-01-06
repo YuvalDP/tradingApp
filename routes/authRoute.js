@@ -1,4 +1,5 @@
 var express = require('express');
+const jwt = require('jsonwebtoken');
 const {  check, validationResult } = require('express-validator/check');
 var router = express.Router();
 const db = require('../Database/connection');
@@ -18,7 +19,9 @@ router.post('/login', [
         if(err) {
             res.status(501).json({ message: 'Internal server error', err });
         } else if(results.length === 1) {
-            res.send(results);
+            const SECRET = process.env.SECRET;
+            const token = jwt.sign({ ...results[0], loggedIn: true }, SECRET, { expiresIn: '1d' });
+            res.send({ token, loggedIn: true });
         } else {
             res.status(422).json({ message: 'Invalid credentials.' });
         }
