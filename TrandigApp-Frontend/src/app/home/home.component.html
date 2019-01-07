@@ -1,0 +1,25 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Quantity</th>
+      <th>CurrentPrice</th>
+      <th>Bought At(average)</th>
+      <th>pnl</th>
+      <th>Close Position</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of liveData">
+      <td>{{row['symbol']}}</td>
+      <td>{{row['quantity']}}</td>
+      <td>{{row['price']}}</td>
+      <td>{{row['cost']}}</td>
+      <td>{{row['PNL']}}</td>
+      <td><a>close</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

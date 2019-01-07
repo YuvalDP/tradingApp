@@ -1,0 +1,25 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Timestamp</th>
+      <th>Symbol</th>
+      <th>Side</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of tradeHistoryList">
+      <td>{{row['timestampopen']}}</td>
+      <td>{{row['symbol']}}</td>
+      <td>{{row['side']}}</td>
+      <td>{{row['price']}}</td>
+      <td>{{row['quantity']}}</td>
+      <td>{{row['status']}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

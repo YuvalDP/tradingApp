@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-sm bg-light">
+  <!-- Brand -->
+  <a class="navbar-brand">Home</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+  <form class="form-inline">
+    <button class="btn btn-outline-success" routerLinkActive="active" routerLink="/updateCredential" type="button">Update Credential</button>
+    <button class="btn btn-outline-success" routerLinkActive="active" routerLink="/tradeHistory" type="button">Trade History</button>
+  </form>
+
+    <!-- Dropdown -->
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+      Dropdown link
+    </a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" (click)="onLogout()">Log Out</a>
+    </div>
+  </li>
+  </ul>
+</nav>
