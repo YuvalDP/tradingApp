@@ -21,7 +21,7 @@ router.post('/login', [
         } else if(results.length === 1) {
             const SECRET = process.env.SECRET;
             const token = jwt.sign({ ...results[0], loggedIn: true }, SECRET, { expiresIn: '1d' });
-            res.send({ token, loggedIn: true });
+            res.send({ token, loggedIn: true, ...results[0] });
         } else {
             res.status(422).json({ message: 'Invalid credentials.' });
         }
