@@ -21,7 +21,9 @@ public listOfRecords: any = [];
 
   ngOnInit() {
   }
+  // signUp Method
   public onRegistration() {
+    this.registerList.username = this.registerList.firstname;
     this.commonService.RegisterData(this.registerList).subscribe((res) => {
       if (res) {
         this.toastr.success('Signup Data Saved Successfully', 'Success Message');

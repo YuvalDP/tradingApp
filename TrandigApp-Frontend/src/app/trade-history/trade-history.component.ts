@@ -10,9 +10,12 @@ public tradeHistoryList: any = [];
   constructor(private commonService: CommonServiceService) { }
 
   ngOnInit() {
+    this.getTradeHistoryData();
   }
+  // getting tradeHistory Data
   public getTradeHistoryData() {
-    this.commonService.getTradeHistory().subscribe((res) => {
+    const id = localStorage.getItem('userId');
+    this.commonService.getTradeHistory(id).subscribe((res) => {
       if (res) {
         this.tradeHistoryList = res;
       }

@@ -17,10 +17,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+  // login Method
   public onLogin() {
     this.commonService.Authenticate(this.login).subscribe((res) => {
       if (res['loggedIn']) {
-        this.commonService.tokenKey = res['token'];
+        localStorage.setItem('fullName', res['firstname'] + ' ' + res['lastname']);
+        localStorage.setItem('userId', res['id']);
+        localStorage.setItem('Token', res['token']);
         localStorage.setItem('userToken', res['loggedIn']);
         this.router.navigate(["home"]);
       }

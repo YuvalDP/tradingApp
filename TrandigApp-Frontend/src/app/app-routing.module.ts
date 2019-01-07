@@ -8,6 +8,7 @@ import {HomeComponent} from "./home/home.component";
 import {UpdateCredentialComponent} from "./update-credential/update-credential.component";
 import {TradeHistoryComponent} from "./trade-history/trade-history.component";
 import { AuthGuard } from './auth.guard.service';
+import {ManageTradesComponent} from "./manage-trades/manage-trades.component";
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'home', component:  HomeComponent, canActivate: [AuthGuard]},
   {path: 'updateCredential', component:  UpdateCredentialComponent, canActivate: [AuthGuard]},
   {path: 'tradeHistory', component:  TradeHistoryComponent, canActivate: [AuthGuard]},
+  {path: 'manageTrade', component:  ManageTradesComponent, canActivate: [AuthGuard]},
 ];
 @NgModule({
   imports: [

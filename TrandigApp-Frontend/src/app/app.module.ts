@@ -15,6 +15,7 @@ import { UpdateCredentialComponent } from './update-credential/update-credential
 import { TradeHistoryComponent } from './trade-history/trade-history.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import {AuthGuard} from "./auth.guard.service";
+import { ManageTradesComponent } from './manage-trades/manage-trades.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import {AuthGuard} from "./auth.guard.service";
     HomeComponent,
     UpdateCredentialComponent,
     TradeHistoryComponent,
-    NavBarComponent
+    NavBarComponent,
+    ManageTradesComponent
   ],
   imports: [
     BrowserModule,

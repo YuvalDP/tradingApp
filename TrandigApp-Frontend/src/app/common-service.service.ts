@@ -3,34 +3,40 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
 @Injectable()
 export class CommonServiceService {
-public tokenKey = '';
   public httpOptions = {
     headers: new HttpHeaders({
-      'Authorization':'Bearer ' + this.tokenKey
+      'Authorization':'Bearer ' + localStorage.getItem('Token')
     })
   };
   constructor(private http: HttpClient) { }
-
+  // login API
   Authenticate(login) {
     return this.http
       .post(`${environment.baseURL}/auth/login`, login);
   }
-
+  // SignUp API
   RegisterData(register) {
     return this.http
       .post(`${environment.baseURL}/user/signup`, register);
   }
+  // Home Page API (get PortFolio)
   getPortFolioData() {
     return this.http
       .get(`${environment.baseURL}/trade/fetchPortfolio`, this.httpOptions);
   }
+  // Update Credentail API
   UpdateCredentialData(data) {
     return this.http
-      .post(`${environment.baseURL}/users/updateCredential`, data);
+      .put(`${environment.baseURL}/users/updateCredential`, data, this.httpOptions);
   }
-  getTradeHistory() {
+  // Trade History Page API
+  getTradeHistory(id) {
     return this.http
-      .get(`${environment.baseURL}/trade/fetchTrades/1`, this.httpOptions);
+      .get(`${environment.baseURL}/trade/fetchTrades/` + id, this.httpOptions);
   }
-
+  // Update Manage Trades API
+  UpdateManageTrades(data) {
+    return this.http
+      .put(`${environment.baseURL}/trade/saveTrades`, data, this.httpOptions);
+  }
 }
