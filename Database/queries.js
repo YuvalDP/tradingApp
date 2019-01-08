@@ -9,7 +9,8 @@ exports.updateCredential = 'UPDATE user set password = ? where email = ?';
 exports.fetchTradeByUser = 'select t.*, c.symbol from trades t left join contract c on t.contractid = c.id where userid = ?';
 
 exports.fetchTradeHistory = `
-SELECT 
+SELECT
+    t.tradeid,
     t.status,
     t.price,
     t.quantity,
