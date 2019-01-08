@@ -95,7 +95,8 @@ router.get('/fetchSymbols', (req, res) => {
             if(err) {
                 res.status(501).json({ message: 'Internal server error' });
             } else {
-                res.send(results);
+                const arr = results.map(s => s.symbol);
+                res.send(arr);
             }
         })
     } else {
