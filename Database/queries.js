@@ -31,3 +31,5 @@ exports.checkTradeExists = 'select * from trademanagement where userid = ? and s
 exports.updateTradeRisks = 'update trademanagement set max_risks = ? where id = ? ';
 
 exports.createTradeRisks = 'insert into trademanagement (symbol, max_risks, userid) values (?, ?, ?)';
+
+exports.getAllSymbols = 'SELECT distinct symbol FROM mydb.contract';
