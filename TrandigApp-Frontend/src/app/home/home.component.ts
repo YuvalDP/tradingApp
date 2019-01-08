@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CommonServiceService} from "../common-service.service";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,11 @@ import {Router} from "@angular/router";
 })
 export class HomeComponent implements OnInit {
 public liveData: any = [];
-  constructor(private commonService: CommonServiceService,private router: Router) { }
+public updateStatus = {
+  'status': 'close',
+  'tradeID': ''
+}
+  constructor(private commonService: CommonServiceService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getLivePortFolio();
@@ -26,7 +31,19 @@ public getLivePortFolio() {
     console.log('error', err)
   });
 }
-public onClosePortFolio() {
-  // update Api calling
+public onClosePortFolio(row) {
+  this.updateStatus.tradeID = row.tradeid;
+  this.commonService.updatStatus(this.updateStatus).subscribe((res) => {
+    if (res) {
+      this.toastr.success('Close Successfully', 'Success Message');
+      this.getLivePortFolio();
+      console.log(res);
+    }
+  },(err) => {
+    if (err['status'] === 401) {
+      this.router.navigate(["login"]);
+    }
+    console.log('error', err)
+  });
 }
 }

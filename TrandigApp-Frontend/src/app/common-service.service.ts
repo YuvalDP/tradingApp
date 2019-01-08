@@ -31,6 +31,11 @@ export class CommonServiceService {
     return this.http
       .put(`${environment.baseURL}/users/updateCredential`, data, this.httpOptions);
   }
+  // update Status
+  updatStatus(data) {
+    return this.http
+      .put(`${environment.baseURL}/trade/updateTrade`, data, this.httpOptions);
+  }
   // Trade History Page API
   getTradeHistory(id) {
     return this.http

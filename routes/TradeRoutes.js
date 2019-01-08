@@ -7,7 +7,8 @@ const { fetchTradeHistory,
     checkTradeExists,
     updateTradeRisks,
     createTradeRisks,
-    getAllSymbols
+    getAllSymbols,
+    updateTrade
 } = require('../Database/queries');
 
 router.get('/fetchTrades/:id',[
@@ -103,5 +104,29 @@ router.get('/fetchSymbols', (req, res) => {
         res.status(401).json({ message: 'Unauthorized' });
     }
 });
+
+router.put('/updateTrade', [
+    check('status').exists().withMessage('status required.'),
+    check('tradeID').exists().withMessage('tradeID required.'),
+    check('tradeID').isInt().withMessage('tradeID required.')
+], (req, res) => {
+    if(req.user) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const err = errors.array().map(err => ({ field: err.param, message: err.msg }));
+            return res.status(422).json(err);
+        }
+        const { status, tradeID } = req.body;
+        db.query(updateTrade, [status, tradeID], (err, results, fields) => {
+            if(err) {
+                res.status(501).json({ message: 'Internal server error' });
+            } else {
+                res.send(results);
+            }
+        })
+    }else {
+        res.status(401).json({ message: 'Unauthorized' })
+    }
+})
 
 module.exports = router;

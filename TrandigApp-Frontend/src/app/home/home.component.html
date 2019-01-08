@@ -19,7 +19,7 @@
       <td>{{row['price']}}</td>
       <td>{{row['cost']}}</td>
       <td>{{row['PNL']}}</td>
-      <td><a (click)="onClosePortFolio()">close</a></td>
+      <td><a class="addStyle" style="text-decoration: underline; color: blue" (click)="onClosePortFolio(row)">close</a></td>
     </tr>
     </tbody>
   </table>
