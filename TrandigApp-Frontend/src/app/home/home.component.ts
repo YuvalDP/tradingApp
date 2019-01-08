@@ -26,4 +26,7 @@ public getLivePortFolio() {
     console.log('error', err)
   });
 }
+public onClosePortFolio() {
+  // update Api calling
+}
 }

@@ -9,25 +9,42 @@
 
         </div>
         <div class="card-body">
-          <form>
+          <form class="form-signin" method="post" name="form" #form="ngForm" novalidate>
             <div class="input-group form-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
               </div>
-              <input type="text" [(ngModel)]="login.email" class="form-control" name="email" placeholder="email" required>
-
+              <input type="text" [(ngModel)]="login.email" class="form-control" name="email" placeholder="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+              <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                   class="text-danger">
+                <div *ngIf="email.errors.required">
+                  Email is required.
+                </div>
+                <div [hidden]="!email.hasError('pattern')">Email format should be
+                  <small><b>joe@abc.com</b></small>
+                </div>
+              </div>
             </div>
             <div class="input-group form-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-key"></i></span>
               </div>
-              <input type="password" [(ngModel)]="login.password" class="form-control" name="password" placeholder="password" required>
+              <input type="password" [(ngModel)]="login.password" class="form-control" name="password" placeholder="password" #password="ngModel" minlength="4" required>
+              <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                   class="text-danger">
+              <span *ngIf="password.errors.required">
+                Password is required.
+              </span>
+                <span *ngIf="password.errors.minlength">
+                Password must be 4 character.
+              </span>
+              </div>
             </div>
             <div class="row align-items-center remember">
               <input type="checkbox">Remember Me
             </div>
             <div class="form-group">
-              <button type="submit" value="Login" (click)="onLogin()" class="btn float-right login_btn">Login</button>
+              <button type="submit" value="Login" [disabled]="!form.valid" (click)="onLogin()" class="btn float-right login_btn">Login</button>
             </div>
           </form>
         </div>

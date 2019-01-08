@@ -29,7 +29,11 @@ export class LoginComponent implements OnInit {
       }
     },(err) => {
       console.log('error', err)
-      this.errorMessage = err.error.message
+      if (err['status'] === 401) {
+        this.errorMessage = err.error.message
+      } else {
+        this.errorMessage = err.error.message
+      }
     });
   }
 }

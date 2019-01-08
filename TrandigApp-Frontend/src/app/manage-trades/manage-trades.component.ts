@@ -15,10 +15,11 @@ public optionSelected: any;
     'userid': localStorage.getItem('userId'),
     'max_risks': null
   }
-  public options = ['ethusdt', 'ethbtc'];
+  public options: any = [];
   constructor(private router: Router, private commonService: CommonServiceService, private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.getSymbols();
   }
   // Manage Trades Method
 public submitManageTrades() {
@@ -48,4 +49,14 @@ public submitManageTrades() {
   public onOptionsSelected(event){
     this.manage.symbol = event;
   }
+  // getting all symbol
+  public getSymbols() {
+      this.commonService.getSymbolList().subscribe((res) => {
+        if (res) {
+          this.options = res;
+        }
+      },(err) => {
+        console.log('error', err)
+      });
+      }
 }

@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
 @Injectable()
 export class CommonServiceService {
+  // public wsbi: any;
+  // wsbi = new WebSocket("wss://stream.binance.com:9443/ws/ethusdt@miniTicker");
   public httpOptions = {
     headers: new HttpHeaders({
       'Authorization':'Bearer ' + localStorage.getItem('Token')
@@ -38,5 +40,10 @@ export class CommonServiceService {
   UpdateManageTrades(data) {
     return this.http
       .put(`${environment.baseURL}/trade/saveTrades`, data, this.httpOptions);
+  }
+  // getting symbols API
+  getSymbolList() {
+    return this.http
+      .get(`${environment.baseURL}/trade/fetchSymbols`, this.httpOptions);
   }
 }
