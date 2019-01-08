@@ -10,6 +10,8 @@ import {ToastrService} from "ngx-toastr";
 })
 export class HomeComponent implements OnInit {
 public liveData: any = [];
+public newData: any = [];
+public newPrice = 0;
 public updateStatus = {
   'status': 'close',
   'tradeID': ''
@@ -22,8 +24,21 @@ public updateStatus = {
 public getLivePortFolio() {
   this.commonService.getPortFolioData().subscribe((res) => {
     if (res) {
+      console.log(res);
       this.liveData = res;
     }
+      // this.newData = this.liveData.map((data) => {
+      //   var URL = `wss://stream.binance.com:9443/ws/${data.symbol}@miniTicker`;
+      //   var wsbi=new WebSocket(URL);
+      //   wsbi.onmessage=function(e){
+      //     console.log('e.data', e.data);
+      //     var cost = data.price * data.quantity;
+      //     var n = JSON.parse(e.data);
+      //     this.newPrice = n.c;
+      //
+      //   }
+      // });
+    console.log('newData', this.newData);
   },(err) => {
     if (err['status'] === 401) {
       this.router.navigate(["login"]);
@@ -31,6 +46,11 @@ public getLivePortFolio() {
     console.log('error', err)
   });
 }
+
+public updateLiveData() {
+
+}
+
 public onClosePortFolio(row) {
   this.updateStatus.tradeID = row.tradeid;
   this.commonService.updatStatus(this.updateStatus).subscribe((res) => {

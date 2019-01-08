@@ -16,6 +16,7 @@ registerList = {
   'email': '',
   'password': ''
 }
+public cpassword;
 public listOfRecords: any = [];
   constructor(private router: Router, private commonService: CommonServiceService, private toastr: ToastrService) { }
 

@@ -6,19 +6,19 @@
     <tr>
       <th>Symbol</th>
       <th>Quantity</th>
-      <th>CurrentPrice</th>
-      <th>Bought At(average)</th>
+      <th>Price</th>
+      <th>Cost</th>
       <th>pnl</th>
       <th>Close Position</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let row of liveData">
-      <td>{{row['symbol']}}</td>
-      <td>{{row['quantity']}}</td>
-      <td>{{row['price']}}</td>
-      <td>{{row['cost']}}</td>
-      <td>{{row['PNL']}}</td>
+      <td>{{row['symbol'] ? row['symbol'] : ''}}</td>
+      <td>{{row['quantity'] ? row['quantity'] : ''}}</td>
+      <td>{{row['price'] ? row['price'] : ''}}</td>
+      <td>{{(row['quantity'] * row['price']) || ''}}</td>
+      <td>{{row['PNL'] ? row['PNL'] : ''}}</td>
       <td><a class="addStyle" style="text-decoration: underline; color: blue" (click)="onClosePortFolio(row)">close</a></td>
     </tr>
     </tbody>
