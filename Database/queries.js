@@ -16,9 +16,7 @@ SELECT
     c.basecurrency,
     c.symbol,
     c.currency,
-    c.symbol,
-    sum(t.quantity * t.price) as cost,
-    (t.price - sum(t.quantity * t.price)) * t.quantity as PNL
+    c.symbol
 FROM
     trades t
         LEFT JOIN
