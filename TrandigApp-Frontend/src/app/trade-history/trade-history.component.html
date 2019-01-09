@@ -4,23 +4,24 @@
   <table class="table table-bordered table-color">
     <thead>
     <tr>
-      <th>Timestamp</th>
       <th>Symbol</th>
       <th>Side</th>
       <th>Price</th>
       <th>Quantity</th>
       <th>Status</th>
+      <th>Timestamp</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let row of tradeHistoryList">
-      <td>{{row['timestampopen']}}</td>
       <td>{{row['symbol']}}</td>
       <td>{{row['side']}}</td>
       <td>{{row['price']}}</td>
       <td>{{row['quantity']}}</td>
       <td>{{row['status']}}</td>
+      <td>{{row['timestampopen']}}</td>
     </tr>
     </tbody>
   </table>
+  <div align="center" *ngIf="tradeHistoryList.length === 0" style="color: blue">No Trade History Found</div>
 </div>

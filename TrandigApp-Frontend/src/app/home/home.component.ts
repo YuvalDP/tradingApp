@@ -22,9 +22,7 @@ public updateStatus = {
   constructor(private commonService: CommonServiceService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
-  setTimeout(() => {
     this.getLivePortFolio();
-  }, 1000);
   }
 
 public getLivePortFolio() {
