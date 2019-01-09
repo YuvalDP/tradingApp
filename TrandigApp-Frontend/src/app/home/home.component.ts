@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CommonServiceService} from "../common-service.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import * as _ from "lodash";
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import {ToastrService} from "ngx-toastr";
 })
 export class HomeComponent implements OnInit {
 public liveData: any = [];
+public uniqueSymbol: any = [];
 public newData: any = [];
 public newPrice = 0;
 public updateStatus = {
@@ -21,11 +23,15 @@ public updateStatus = {
   ngOnInit() {
     this.getLivePortFolio();
   }
+
 public getLivePortFolio() {
   this.commonService.getPortFolioData().subscribe((res) => {
     if (res) {
       console.log(res);
       this.liveData = res;
+      this.uniqueSymbol = _.uniqBy(this.liveData, 'symbol');
+      this.uniqueSymbol = this.uniqueSymbol.map(dt => dt.symbol);
+      this.fetchLiveDataBySymbol();
     }
       // this.newData = this.liveData.map((data) => {
       //   var URL = `wss://stream.binance.com:9443/ws/${data.symbol}@miniTicker`;
@@ -47,8 +53,16 @@ public getLivePortFolio() {
   });
 }
 
-public updateLiveData() {
-
+public fetchLiveDataBySymbol() {
+  this.uniqueSymbol.map((symb) => {
+    var URL = `wss://stream.binance.com:9443/ws/${symb}@miniTicker`;
+    var wsbi=new WebSocket(URL);
+    wsbi.onmessage=function(e){
+      console.log('e.data', e.data);
+      var n = JSON.parse(e.data);
+      document.getElementById(symb).innerHTML = n.c;
+    }
+  });
 }
 
 public onClosePortFolio(row) {

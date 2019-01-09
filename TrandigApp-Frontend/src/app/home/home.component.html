@@ -1,6 +1,9 @@
 <app-nav-bar></app-nav-bar>
 <br>
 <div class="container">
+  <div *ngFor="let symbol of uniqueSymbol">
+    <span id="{{symbol}}"></span>
+  </div>
   <table class="table table-bordered table-color">
     <thead>
     <tr>
@@ -16,8 +19,8 @@
     <tr *ngFor="let row of liveData">
       <td>{{row['symbol'] ? row['symbol'] : ''}}</td>
       <td>{{row['quantity'] ? row['quantity'] : ''}}</td>
-      <td>{{row['price'] ? row['price'] : ''}}</td>
-      <td>{{(row['quantity'] * row['price']) || ''}}</td>
+      <td>{{document.getElementById(row['symbol']) ? document.getElementById(row['symbol']).innerHTML : ''}}</td>
+      <td>{{document.getElementById(row['symbol']) ? row['quantity'] * document.getElementById(row['symbol']).innerHTML : ''}}</td>
       <td>{{row['PNL'] ? row['PNL'] : ''}}</td>
       <td><a class="addStyle" style="text-decoration: underline; color: blue" (click)="onClosePortFolio(row)">close</a></td>
     </tr>
