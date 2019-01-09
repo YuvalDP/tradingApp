@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-sm bg-light">
+  <!-- Brand -->
+  <a class="navbar-brand" routerLinkActive="active" routerLink="/home">Crypto Trading App</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+  <form class="form-inline">
+    <button class="btn btn-outline-success margin" routerLinkActive="active" routerLink="/updateCredential" type="button">Update Credential</button>
+    <button class="btn btn-outline-success margin" routerLinkActive="active" routerLink="/tradeHistory" type="button">Trade History</button>
+    <button class="btn btn-outline-success margin" routerLinkActive="active" routerLink="/manageTrade" type="button">Manage Trades</button>
+  </form>
+
+    <!-- Dropdown -->
+    <div class="settings">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+      {{fullName}}
+    </a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" (click)="onLogout()">Log Out</a>
+    </div>
+  </li>
+    </div>
+  </ul>
+</nav>

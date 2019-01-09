@@ -1,0 +1,11 @@
+.table-color {
+  color: azure;
+}
+.addStyle {
+  text-decoration: underline;
+  color: blue;
+}
+
+.addStyle:hover {
+  cursor: pointer;
+}
