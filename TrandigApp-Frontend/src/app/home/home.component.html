@@ -19,9 +19,9 @@
     <tr *ngFor="let row of liveData">
       <td>{{row['symbol'] ? row['symbol'] : ''}}</td>
       <td>{{row['quantity'] ? row['quantity'] : ''}}</td>
-      <td>{{document.getElementById(row['symbol']) ? document.getElementById(row['symbol']).innerHTML : ''}}</td>
-      <td>{{document.getElementById(row['symbol']) ? row['quantity'] * document.getElementById(row['symbol']).innerHTML : ''}}</td>
-      <td>{{row['PNL'] ? row['PNL'] : ''}}</td>
+      <td id="{{row['symbol']+'-'+row['tradeid']}}">{{row['price']}}</td>
+      <td>{{row['quantity'] * row['price']}}</td>
+      <td id="pnl-{{row['symbol']}}-{{row['quantity'] * row['price']}}-{{row['quantity']}}">{{row['PNL'] ? row['PNL'] : ''}}</td>
       <td><a class="addStyle" style="text-decoration: underline; color: blue" (click)="onClosePortFolio(row)">close</a></td>
     </tr>
     </tbody>

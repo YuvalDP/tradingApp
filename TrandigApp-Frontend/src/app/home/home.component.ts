@@ -3,6 +3,7 @@ import {CommonServiceService} from "../common-service.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import * as _ from "lodash";
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,9 @@ public updateStatus = {
   constructor(private commonService: CommonServiceService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
+  setTimeout(() => {
     this.getLivePortFolio();
+  }, 1000);
   }
 
 public getLivePortFolio() {
@@ -33,17 +36,6 @@ public getLivePortFolio() {
       this.uniqueSymbol = this.uniqueSymbol.map(dt => dt.symbol);
       this.fetchLiveDataBySymbol();
     }
-      // this.newData = this.liveData.map((data) => {
-      //   var URL = `wss://stream.binance.com:9443/ws/${data.symbol}@miniTicker`;
-      //   var wsbi=new WebSocket(URL);
-      //   wsbi.onmessage=function(e){
-      //     console.log('e.data', e.data);
-      //     var cost = data.price * data.quantity;
-      //     var n = JSON.parse(e.data);
-      //     this.newPrice = n.c;
-      //
-      //   }
-      // });
     console.log('newData', this.newData);
   },(err) => {
     if (err['status'] === 401) {
@@ -54,11 +46,26 @@ public getLivePortFolio() {
 }
 
 public fetchLiveDataBySymbol() {
+  $("td[id^='ethusdt']").each(function (i, el) {
+    console.log('val', el);
+  });
   this.uniqueSymbol.map((symb) => {
     var URL = `wss://stream.binance.com:9443/ws/${symb}@miniTicker`;
     var wsbi=new WebSocket(URL);
     wsbi.onmessage=function(e){
-      console.log('e.data', e.data);
+      var n = JSON.parse(e.data);
+      $(`td[id^=${symb}]`).each(function (i, el) {
+        el.innerHTML = n.c;
+      });
+      $(`td[id^='pnl-${symb}']`).each(function (i, el) {
+        console.log('n.c ',n.c);
+        var cost = parseInt(el.id.split('-')[2]);
+        var quantity = parseInt(el.id.split('-')[3]);
+        el.innerHTML = (n.c - cost) * quantity;
+      });
+
+
+      // console.log('e.data', e.data);
       var n = JSON.parse(e.data);
       document.getElementById(symb).innerHTML = n.c;
     }
