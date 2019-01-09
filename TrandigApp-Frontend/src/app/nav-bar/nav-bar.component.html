@@ -5,12 +5,13 @@
   <!-- Links -->
   <ul class="navbar-nav">
   <form class="form-inline">
-    <button class="btn btn-outline-success" routerLinkActive="active" routerLink="/updateCredential" type="button">Update Credential</button>
-    <button class="btn btn-outline-success" routerLinkActive="active" routerLink="/tradeHistory" type="button">Trade History</button>
-    <button class="btn btn-outline-success" routerLinkActive="active" routerLink="/manageTrade" type="button">Manage Trades</button>
+    <button class="btn btn-outline-success margin" routerLinkActive="active" routerLink="/updateCredential" type="button">Update Credential</button>
+    <button class="btn btn-outline-success margin" routerLinkActive="active" routerLink="/tradeHistory" type="button">Trade History</button>
+    <button class="btn btn-outline-success margin" routerLinkActive="active" routerLink="/manageTrade" type="button">Manage Trades</button>
   </form>
 
     <!-- Dropdown -->
+    <div class="settings">
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
       {{fullName}}
@@ -19,5 +20,6 @@
       <a class="dropdown-item" (click)="onLogout()">Log Out</a>
     </div>
   </li>
+    </div>
   </ul>
 </nav>

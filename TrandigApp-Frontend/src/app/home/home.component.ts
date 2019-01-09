@@ -63,11 +63,6 @@ public fetchLiveDataBySymbol() {
         var quantity = parseInt(el.id.split('-')[3]);
         el.innerHTML = (n.c - cost) * quantity;
       });
-
-
-      // console.log('e.data', e.data);
-      var n = JSON.parse(e.data);
-      document.getElementById(symb).innerHTML = n.c;
     }
   });
 }
