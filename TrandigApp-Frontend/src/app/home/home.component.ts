@@ -17,7 +17,7 @@ public newData: any = [];
 public newPrice = 0;
 public updateStatus = {
   'status': 'close',
-  'tradeID': ''
+  'contractid': ''
 }
   constructor(private commonService: CommonServiceService, private router: Router, private toastr: ToastrService) { }
 
@@ -67,7 +67,7 @@ public fetchLiveDataBySymbol() {
 }
 
 public onClosePortFolio(row) {
-  this.updateStatus.tradeID = row.tradeid;
+  this.updateStatus.contractid = row.contractid;
   this.commonService.updatStatus(this.updateStatus).subscribe((res) => {
     if (res) {
       this.toastr.success('Close Successfully', 'Success Message');

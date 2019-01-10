@@ -11,6 +11,7 @@ exports.fetchTradeByUser = 'select t.*, c.symbol from trades t left join contrac
 exports.fetchTradeHistory = `
 SELECT 
     t.status,
+    t.contractid,
     symbol,
     sum(t.quantity) as quantity,
     sum(t.price * t.quantity) / sum(t.quantity) as boughtAt,
@@ -32,4 +33,4 @@ exports.createTradeRisks = 'insert into trademanagement (symbol, max_risks, user
 
 exports.getAllSymbols = 'SELECT distinct symbol FROM mydb.contract';
 
-exports.updateTrade = 'UPDATE trades set status = ? where tradeid = ?';
+exports.updateTrade = 'UPDATE trades set status = ? where contractid = ?';
