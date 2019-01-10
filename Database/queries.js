@@ -9,21 +9,20 @@ exports.updateCredential = 'UPDATE user set password = ? where email = ?';
 exports.fetchTradeByUser = 'select t.*, c.symbol from trades t left join contract c on t.contractid = c.id where userid = ?';
 
 exports.fetchTradeHistory = `
-SELECT
-    t.tradeid,
+SELECT 
     t.status,
-    t.price,
-    t.quantity,
-    c.basecurrency,
-    c.symbol,
-    c.currency,
+    symbol,
+    sum(t.quantity) as quantity,
+    sum(t.price * t.quantity) / sum(t.quantity) as boughtAt,
     c.symbol
 FROM
     trades t
         LEFT JOIN
     contract c ON t.contractid = c.id
+    INNER JOIN
+    user u on u.id = t.userid
 WHERE
-    status = 'open'`;
+    status = 'open' and u.id = ? group by symbol`;
 
 exports.checkTradeExists = 'select * from trademanagement where userid = ? and symbol = ?';
 

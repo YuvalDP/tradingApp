@@ -35,9 +35,18 @@ router.get('/fetchTrades/:id',[
     }
 });
 
-router.get('/fetchPortfolio', (req, res) => {
+router.get('/fetchPortfolio/:id', [
+    check('id').exists().withMessage('Id params required'),
+    check('id').isInt().withMessage('Id params must be number')
+], (req, res) => {
    if(req.user){
-       db.query(fetchTradeHistory, [], (err, results, fields) => {
+       const errors = validationResult(req);
+       if (!errors.isEmpty()) {
+           const err = errors.array().map(err => ({ field: err.param, message: err.msg }));
+           return res.status(422).json(err);
+       }
+       const { id } = req.params;
+       db.query(fetchTradeHistory, [id], (err, results, fields) => {
            if(err) {
                res.status(501).json({ message: 'Internal server error', err });
            } else {

@@ -28,9 +28,9 @@ export class CommonServiceService {
       .post(`${environment.baseURL}/user/signup`, register);
   }
   // Home Page API (get PortFolio)
-  getPortFolioData() {
+  getPortFolioData(id) {
     return this.http
-      .get(`${environment.baseURL}/trade/fetchPortfolio`, this.getAuthToken());
+      .get(`${environment.baseURL}/trade/fetchPortfolio/${id}`, this.getAuthToken());
   }
   // Update Credentail API
   UpdateCredentialData(data) {
@@ -42,10 +42,10 @@ export class CommonServiceService {
     return this.http
       .put(`${environment.baseURL}/trade/updateTrade`, data, this.getAuthToken());
   }
-  // Trade History Page API
+  // Trade History Page APIgetTradeHistory
   getTradeHistory(id) {
     return this.http
-      .get(`${environment.baseURL}/trade/fetchTrades/` + id, this.getAuthToken());
+      .get(`${environment.baseURL}/trade/fetchTrades/${id}`, this.getAuthToken());
   }
   // Update Manage Trades API
   UpdateManageTrades(data) {

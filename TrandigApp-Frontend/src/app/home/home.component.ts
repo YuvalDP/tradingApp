@@ -26,7 +26,8 @@ public updateStatus = {
   }
 
 public getLivePortFolio() {
-  this.commonService.getPortFolioData().subscribe((res) => {
+  const id = localStorage.getItem('userId');
+  this.commonService.getPortFolioData(id).subscribe((res) => {
     if (res) {
       console.log(res);
       this.liveData = res;
@@ -57,9 +58,9 @@ public fetchLiveDataBySymbol() {
       });
       $(`td[id^='pnl-${symb}']`).each(function (i, el) {
         console.log('n.c ',n.c);
-        var cost = parseInt(el.id.split('-')[2]);
+        var boughtAt = parseInt(el.id.split('-')[2]);
         var quantity = parseInt(el.id.split('-')[3]);
-        el.innerHTML = (n.c - cost) * quantity;
+        el.innerHTML = (n.c - boughtAt) * quantity;
       });
     }
   });
