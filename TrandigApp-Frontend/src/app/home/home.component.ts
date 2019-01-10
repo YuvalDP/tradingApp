@@ -57,7 +57,7 @@ public fetchLiveDataBySymbol() {
         el.innerHTML = n.c;
       });
       $(`td[id^='pnl-${symb}']`).each(function (i, el) {
-        console.log('n.c ',n.c);
+        // console.log('n.c ',n.c);
         var boughtAt = parseInt(el.id.split('-')[2]);
         var quantity = parseInt(el.id.split('-')[3]);
         el.innerHTML = (n.c - boughtAt) * quantity;
