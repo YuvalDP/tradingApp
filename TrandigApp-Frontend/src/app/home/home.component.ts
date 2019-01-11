@@ -60,7 +60,21 @@ public fetchLiveDataBySymbol() {
         // console.log('n.c ',n.c);
         var boughtAt = parseInt(el.id.split('-')[2]);
         var quantity = parseInt(el.id.split('-')[3]);
-        el.innerHTML = (n.c - boughtAt) * quantity;
+        var pnl = (n.c - boughtAt) * quantity;
+        if(pnl > 0) {
+          el.style.color = 'green';
+          el.innerHTML = pnl;
+          var img = $('<img style="height: 20px;width: 10px;margin-left: 10px;color: white;" id="dynamic">'); //Equivalent: $(document.createElement('img'))
+          img.attr('src', 'http://www.clker.com/cliparts/8/8/2/2/11949856011357057871arrow-up-green_benji_par_01.svg');
+          img.appendTo(el);
+        } else {
+          el.style.color = 'red';
+          el.innerHTML = pnl;
+          var img = $('<img style="height: 20px;width: 10px;margin-left: 10px;color: white;" id="dynamic">'); //Equivalent: $(document.createElement('img'))
+          img.attr('src', 'http://www.clker.com/cliparts/3/a/4/9/11949855912003738015arrow-down-red_benji_par_01.svg');
+          img.appendTo(el);
+
+        }
       });
     }
   });
