@@ -19,7 +19,8 @@
       <td id="{{row['symbol']+'-'+row['tradeid']}}">{{row['price']}}</td>
       <td>{{row['boughtAt']}}</td>
       <td id="pnl-{{row['symbol']}}-{{row['boughtAt']}}-{{row['quantity']}}">{{row['PNL'] ? row['PNL'] : ''}}</td>
-      <td><a class="addStyle" style="text-decoration: underline; color: blue" (click)="onClosePortFolio(row)">close</a></td>
+      <td><a class="addStyle" style="text-decoration: underline; color: blue" (click)="
+      onClosePortFolio(row)">close</a></td>
     </tr>
     </tbody>
   </table>

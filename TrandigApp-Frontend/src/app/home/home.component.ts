@@ -81,18 +81,24 @@ public fetchLiveDataBySymbol() {
 }
 
 public onClosePortFolio(row) {
-  this.updateStatus.contractid = row.contractid;
-  this.commonService.updatStatus(this.updateStatus).subscribe((res) => {
-    if (res) {
-      this.toastr.success('Close Successfully', 'Success Message');
-      this.getLivePortFolio();
-      console.log(res);
-    }
-  },(err) => {
-    if (err['status'] === 401) {
-      this.router.navigate(["login"]);
-    }
-    console.log('error', err)
-  });
+  var istrue = confirm('Are you sure for clsoing this contract?');
+  if(istrue) {
+    this.updateStatus.contractid = row.contractid;
+    this.commonService.updatStatus(this.updateStatus).subscribe((res) => {
+      if (res) {
+        this.toastr.success('Contract closed.', 'Success Message');
+        this.getLivePortFolio();
+        console.log(res);
+      }
+    },(err) => {
+      if (err['status'] === 401) {
+        this.router.navigate(["login"]);
+      }
+      console.log('error', err)
+    });
+  } else {
+    return null;
+  }
+
 }
 }
