@@ -31,7 +31,7 @@ public submitManageTrades() {
         'userid': '',
         'max_risks': null
       }
-      this.toastr.success('Manage Trades Update Successfully', 'Success Message');
+      this.toastr.success('Trade Saved', 'Success Message');
     }
   },(err) => {
     if (err['status'] === 401) {
@@ -40,7 +40,7 @@ public submitManageTrades() {
         'userid': '',
         'max_risks': null
       }
-      this.toastr.error('Manage trades not updated', 'Update Failed');
+      this.toastr.error('Somthing wrong! retry with login again!', 'Update Failed');
     }
     console.log('error', err)
   });

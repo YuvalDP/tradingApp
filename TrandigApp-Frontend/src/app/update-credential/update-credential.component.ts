@@ -11,9 +11,9 @@ import {Router} from "@angular/router";
 export class UpdateCredentialComponent implements OnInit {
   public errorMessage;
   updateList = {
-    'email': '',
-    'password': '',
-    'newPassword': ''
+    'userid': localStorage.getItem('userId'),
+    'apiKey': '',
+    'secretKey': ''
   }
   constructor(private router: Router, private commonService: CommonServiceService, private toastr: ToastrService) { }
 
@@ -23,16 +23,16 @@ export class UpdateCredentialComponent implements OnInit {
   public updateCredential() {
     this.commonService.UpdateCredentialData(this.updateList).subscribe((res) => {
       if (res) {
-        this.toastr.success('Update Credential Successfully', 'Success Message');
-        this.router.navigate(["login"]);
+        this.toastr.success('Credential Updated Successfully', 'Success Message');
+        this.router.navigate(["home"]);
       }
     },(err) => {
       this.errorMessage = err.error.message
       if (err['status'] === 401) {
         this.updateList = {
-          'email': '',
-          'password': '',
-          'newPassword': ''
+          'userid': '',
+          'apiKey': '',
+          'secretKey': ''
         };
         this.toastr.error('UnAuthorized User', 'Update Failed');
       }

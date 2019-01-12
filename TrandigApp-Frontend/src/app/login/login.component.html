@@ -10,35 +10,35 @@
         </div>
         <div class="card-body">
           <form class="form-signin" method="post" name="form" #form="ngForm" novalidate>
-            <div class="input-group form-group">
+            <div class="input-group form-group" style="margin: 0;margin-top: 10px">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
               </div>
               <input type="text" [(ngModel)]="login.email" class="form-control" name="email" placeholder="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
-              <div *ngIf="email.invalid && (email.dirty || email.touched)"
-                   class="text-danger">
-                <div *ngIf="email.errors.required">
-                  Email is required.
-                </div>
-                <div [hidden]="!email.hasError('pattern')">Email format should be
-                  <small><b>joe@abc.com</b></small>
-                </div>
+            </div>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                 class="text-danger err-space">
+              <div *ngIf="email.errors.required">
+                <small><b>Email is required.</b></small>
+              </div>
+              <div [hidden]="!email.hasError('pattern')">
+                <small><b> Email format should be joe@abc.com</b></small>
               </div>
             </div>
-            <div class="input-group form-group">
+            <div class="input-group form-group" style="margin: 0;margin-top: 10px">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-key"></i></span>
               </div>
               <input type="password" [(ngModel)]="login.password" class="form-control" name="password" placeholder="password" #password="ngModel" minlength="4" required>
-              <div *ngIf="password.invalid && (password.dirty || password.touched)"
-                   class="text-danger">
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                 class="text-danger">
               <span *ngIf="password.errors.required">
-                Password is required.
+                <small><b>Password is required.</b></small>
               </span>
-                <span *ngIf="password.errors.minlength">
-                Password must be 4 character.
+              <span *ngIf="password.errors.minlength">
+                <small><b>Password must be 4 character.</b></small>
               </span>
-              </div>
             </div>
             <div class="row align-items-center remember">
               <input type="checkbox">Remember Me
@@ -48,7 +48,9 @@
             </div>
           </form>
         </div>
+        <div align="center">
         <span *ngIf="errorMessage" style="color: red">Email or Password Invalid!</span>
+        </div>
         <div class="card-footer">
           <div class="d-flex justify-content-center links">
             Don't have an account?<a routerLink="/register">Registration</a>
